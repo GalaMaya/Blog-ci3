@@ -49,6 +49,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
+
+
+
+
+
 $route['login'] = 'auth/login';
 $route['logout'] = 'auth/logout';
 
@@ -56,3 +61,18 @@ $route['logout'] = 'auth/logout';
 $route['default_controller'] = 'auth';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+
+// API routes
+
+$route['api-v1/login']['get'] = 'API/Auth/login';
+
+// users
+$route['api-v1/user']['post'] = 'API/Users/add';
+$route['api-v1/user']['get'] = 'API/Users/get';
+$route['api-v1/user/(:num)']['put'] = 'API/Users/update/$1';
+$route['api-v1/user/(:num)']['delete'] = 'API/Users/delete/$1';
+
+
+
+// END API routes
