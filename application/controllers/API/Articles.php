@@ -6,12 +6,15 @@ class Articles extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->library('AuthMiddleware');
         $this->load->model('Articles_model');
         header('Content-Type: application/json');
     }
 
     public function get()
     {
+        $this->authmiddleware->verify([1, 2, 3]);
+
         if ($this->input->method(true) !== 'GET') {
             show_error('Method Not Allowed', 405);
         }
@@ -40,6 +43,9 @@ class Articles extends CI_Controller
 
     public function add()
     {
+
+        $this->authmiddleware->verify([1, 2]);
+
         if ($this->input->method(true) !== 'POST') {
             show_error('Method Not Allowed', 405);
         }
@@ -123,6 +129,9 @@ class Articles extends CI_Controller
 
     public function update($id)
     {
+
+        $this->authmiddleware->verify([1, 2]);
+
         if ($this->input->method(true) !== 'POST') {
             show_error('Method Not Allowed', 405);
         }
@@ -237,6 +246,9 @@ class Articles extends CI_Controller
 
     public function delete($id)
     {
+
+        $this->authmiddleware->verify([1]);
+
         if ($this->input->method(true) !== 'DELETE') {
             show_error('Method Not Allowed', 405);
         }

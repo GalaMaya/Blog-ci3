@@ -64,7 +64,7 @@ $route['translate_uri_dashes'] = FALSE;
 
 
 // API routes
-$route['api-v1/login']['get'] = 'API/Auth/login';
+$route['api-v1/login']['post'] = 'API/Auth/login';
 
 // users
 $route['api-v1/user']['post'] = 'API/Users/add';
