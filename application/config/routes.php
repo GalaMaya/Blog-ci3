@@ -64,7 +64,6 @@ $route['translate_uri_dashes'] = FALSE;
 
 
 // API routes
-
 $route['api-v1/login']['get'] = 'API/Auth/login';
 
 // users
@@ -73,6 +72,10 @@ $route['api-v1/user']['get'] = 'API/Users/get';
 $route['api-v1/user/(:num)']['put'] = 'API/Users/update/$1';
 $route['api-v1/user/(:num)']['delete'] = 'API/Users/delete/$1';
 
-
+// Articles
+$route['api-v1/article']['post'] = 'API/Articles/add';
+$route['api-v1/article']['get'] = 'API/Articles/get';
+$route['api-v1/article/(:num)']['post'] = 'API/Articles/update/$1';
+$route['api-v1/article/(:num)']['delete'] = 'API/Articles/delete/$1';
 
 // END API routes
