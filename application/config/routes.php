@@ -58,6 +58,28 @@ $route['login'] = 'auth/login';
 $route['logout'] = 'auth/logout';
 
 
+// Dashboard
+$route['dashboard'] = 'Dashboard/Home/index';
+
+// user
+$route['dashboard/user'] = 'Dashboard/Users/index';
+$route['dashboard/user/add'] = 'Dashboard/Users/add';
+$route['dashboard/user/save'] = 'Dashboard/Users/save';
+$route['dashboard/user/edit/(:num)'] = 'Dashboard/Users/edit/$1';
+$route['dashboard/user/update/(:num)'] = 'Dashboard/Users/update/$1';
+$route['dashboard/user/delete/(:num)'] = 'Dashboard/Users/delete/$1';
+
+
+// article
+$route['dashboard/article'] = 'Dashboard/Article/index';
+$route['dashboard/article/add'] = 'Dashboard/Article/add';
+$route['dashboard/article/save'] = 'Dashboard/Article/save';
+$route['dashboard/article/edit/(:num)'] = 'Dashboard/Article/edit/$1';
+$route['dashboard/article/update/(:num)'] = 'Dashboard/Article/update/$1';
+$route['dashboard/article/delete/(:num)'] = 'Dashboard/Article/delete/$1';
+$route['dashboard/article/(:num)'] = 'Dashboard/Article/detail/$1';
+
+
 $route['default_controller'] = 'auth';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
@@ -69,12 +91,14 @@ $route['api-v1/login']['post'] = 'API/Auth/login';
 // users
 $route['api-v1/user']['post'] = 'API/Users/add';
 $route['api-v1/user']['get'] = 'API/Users/get';
+$route['api-v1/user/(:num)']['get'] = 'API/Users/getById/$1';
 $route['api-v1/user/(:num)']['put'] = 'API/Users/update/$1';
 $route['api-v1/user/(:num)']['delete'] = 'API/Users/delete/$1';
 
 // Articles
 $route['api-v1/article']['post'] = 'API/Articles/add';
 $route['api-v1/article']['get'] = 'API/Articles/get';
+$route['api-v1/article/(:num)']['get'] = 'API/Articles/getById/$1';
 $route['api-v1/article/(:num)']['post'] = 'API/Articles/update/$1';
 $route['api-v1/article/(:num)']['delete'] = 'API/Articles/delete/$1';
 

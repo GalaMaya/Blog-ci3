@@ -32,7 +32,7 @@ class Auth extends CI_Controller
             $payload = [
                 'iss' => 'localhost',          // Issuer
                 'iat' => time(),               // Issued at
-                'exp' => time() + (60 * 60),   // Expiration (1 hour)
+                'exp' => time() + (60 * 60 * 24), 
                 'uid' => $user->id,
                 'role' => $user->role_id,
                 'email' => $user->email
@@ -43,6 +43,10 @@ class Auth extends CI_Controller
     
             json_response([
                 'status' => true,
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+                'role' => $user->role_id,
                 'token' => $jwt
             ], 200);
         } else {

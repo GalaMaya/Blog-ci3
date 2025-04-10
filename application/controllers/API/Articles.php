@@ -147,14 +147,12 @@ class Articles extends CI_Controller
                 'title'     => $this->input->post('title'),
                 'content'   => $this->input->post('content'),
                 'user_id'   => $this->input->post('user_id'),
-                'status'    => $this->input->post('status'),
             ];
 
             // Validasi data
             $this->form_validation->set_data($data);
             $this->form_validation->set_rules('title', 'Title', 'required');
             $this->form_validation->set_rules('content', 'Content', 'required');
-            $this->form_validation->set_rules('status', 'Status', 'required');
             $this->form_validation->set_rules('user_id', 'User ID', 'required');
 
             if ($this->form_validation->run() === FALSE) {
@@ -215,7 +213,6 @@ class Articles extends CI_Controller
                 'content'    => $data['content'],
                 'banner'     => $banner_name,
                 'attachment' => $attachment_name,
-                'status'     => $data['status'],
                 'user_id'    => $data['user_id'],
                 'updated_at' => date('Y-m-d H:i:s')
             ];
@@ -241,6 +238,35 @@ class Articles extends CI_Controller
                     'status' => false,
                     'errors' => $errorMessage
                 ]));
+        }
+    }
+
+    public function getById($id)
+    {
+        $this->authmiddleware->verify([1, 2, 3]);
+
+        if ($this->input->method(true) !== 'GET') {
+            show_error('Method Not Allowed', 405);
+        }
+
+        try {
+            $article = $this->Articles_model->getById($id);
+
+            if (!$article) {
+                throw new Exception('Article tidak ditemukan', 404);
+            }
+
+            json_response([
+                'status' => true,
+                'data' => $article
+            ]);
+        } catch (Exception $e) {
+            http_response_code($e->getCode() ?: 500);
+
+            json_response([
+                'status' => false,
+                'message' => $e->getMessage()
+            ]);
         }
     }
 

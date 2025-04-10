@@ -103,6 +103,38 @@ class Users extends CI_Controller
         }
     }
 
+    public function getById($id){
+        $this->authmiddleware->verify([1, 2]);
+
+        if ($this->input->method(true) !== 'GET') {
+            show_error('Method Not Allowed', 405);
+        }
+
+        try {
+            $user = $this->users_model->get_user_by_id($id);
+            if (!$user) {
+                throw new Exception(json_encode(['general' => 'User tidak ditemukan']), 404);
+            }
+
+            json_response([
+                'status' => true,
+                'data' => $user
+            ]);
+        } catch (Exception $e) {
+            http_response_code($e->getCode() ?: 500);
+
+            $errorMessage = json_decode($e->getMessage(), true);
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                $errorMessage = ['general' => strip_tags($e->getMessage())];
+            }
+
+            json_response([
+                'status' => false,
+                'errors' => $errorMessage
+            ]);
+        }
+    }
+
     public function update($id)
     {
 
@@ -119,7 +151,6 @@ class Users extends CI_Controller
             $this->form_validation->set_data($_POST);
             $this->form_validation->set_rules('name', 'Nama', 'required');
             $this->form_validation->set_rules('role_id', 'Role ID', 'required|integer');
-            $this->form_validation->set_rules('status', 'Status', 'required');
 
             if ($this->form_validation->run() === FALSE) {
                 throw new Exception(json_encode($this->form_validation->error_array()), 422);
@@ -133,7 +164,6 @@ class Users extends CI_Controller
             $data = [
                 'name' => $_POST['name'],
                 'role_id' => $_POST['role_id'],
-                'status' => $_POST['status']
             ];
 
             $updated = $this->users_model->update_user($id, $data);
