@@ -317,6 +317,5 @@ $user = $this->session->userdata('user');
 <body>
 
     <div class="header">
-        <h1>Dashboard</h1>
         <div class="user-name">Halo, <?= $user['name']; ?></div>
     </div>
