@@ -6,7 +6,7 @@
 Project Simple Blog yang dibuat dengan Codeigniter 3, CSS Native
 
 
-## <a href="https://laragon.org/download/index.html">Demo Link</a>
+## <a href="https://blog-ci3.galamayastudio.my.id">Demo Link</a>
 
 
 ## Built With
