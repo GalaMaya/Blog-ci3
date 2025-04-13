@@ -6,6 +6,8 @@
 Project Simple Blog yang dibuat dengan Codeigniter 3, CSS Native
 
 
+## <a href="https://laragon.org/download/index.html">Demo Link</a>
+
 
 ## Built With
 
